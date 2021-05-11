@@ -2,10 +2,6 @@
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-body {
-  margin: 0;
-  font-family: 'Lato', sans-serif;
-  background-color: #f6f6f6;
-  color: #352359;
+.nav-link{
+    font-size: 1.1rem;
 }
-
