@@ -22,6 +22,13 @@ export default class App extends Component {
     }
   }
 
+  statusIngreso = (ingreso) => {
+    this.setState({
+      logged: ingreso,
+      nombreIngreso:'Salir'
+    })
+  }
+
   render(){
     return(
       <Router>
@@ -45,7 +52,7 @@ export default class App extends Component {
                       <NavLink to='/contacto' className='nav-link'>Contacto</NavLink>
                     </li>
                     <li className='nav-item'>
-                      <NavLink to='/ingreso' className='nav-link'>{this.state.nombreIngreso}</NavLink>
+                      <NavLink to='/ingreso' className='nav-link'>Ingresar</NavLink>
                     </li>
                   </ul>
               </div>
@@ -60,7 +67,7 @@ export default class App extends Component {
                 <Contacto />
               </Route>
               <Route path='/ingreso'>
-                <Ingreso />
+                <Ingreso logged={this.state.logged} statusIngreso={this.statusIngreso}/>
               </Route>
             </Switch>
           </div>
