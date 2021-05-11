@@ -54,13 +54,13 @@ export default class App extends Component {
           <div className='container-fluid'>
             <Switch>
               <Route path='/' exact>
-                <Inicio nombre='Bryan'/>
+                <Inicio />
               </Route>
               <Route path='/contacto'>
-                <Contacto nombre='Bryan'/>
+                <Contacto />
               </Route>
               <Route path='/ingreso'>
-                <Ingreso nombre='Bryan'/>
+                <Ingreso />
               </Route>
             </Switch>
           </div>
