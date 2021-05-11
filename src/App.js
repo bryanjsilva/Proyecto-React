@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   NavLink
 } from "react-router-dom";
 import favicon from './img/paseando-ando-favicon-min.png'
@@ -31,8 +30,8 @@ export default class App extends Component {
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
               <div className="container-fluid">
                 <div className='col-4 col-md-1 text-center'>
-                  <a className="navbar-brand">
-                    <img className='w-50' src={favicon}></img>
+                  <a className="navbar-brand" href='/'>
+                    <img className='w-50' src={favicon} alt='logo paseando ando'></img>
                   </a>
                 </div>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,7 +51,7 @@ export default class App extends Component {
               </div>
             </nav>
           </div>
-          <div className='row'>
+          <div className='container-fluid'>
             <Switch>
               <Route path='/' exact>
                 <Inicio nombre='Bryan'/>
