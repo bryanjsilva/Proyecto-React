@@ -13,19 +13,19 @@ export default class Contacto extends Component {
                     <h2>¡Síguenos!</h2><br/>
                     <section className='d-flex justify-content-around'>
                         <a href='https://www.facebook.com' target='_blank' rel="noreferrer">
-                            <i className='fa fa-facebook fa-fw'></i>
+                            <i className='fa fa-facebook fa-fw redes'></i>
                         </a>
                         <a href='https://www.linkedin.com' target='_blank' rel="noreferrer">
-                            <i className='fa fa-linkedin fa-fw'></i>
+                            <i className='fa fa-linkedin fa-fw redes'></i>
                         </a>
                         <a href='https://www.instagram.com' target='_blank' rel="noreferrer">
-                            <i className='fa fa-instagram fa-fw'></i>
+                            <i className='fa fa-instagram fa-fw redes'></i>
                         </a>
                         <a href='https://www.twitter.com' target='_blank' rel="noreferrer">
-                            <i className='fa fa-twitter fa-fw'></i>
+                            <i className='fa fa-twitter fa-fw redes'></i>
                         </a>
                         <a href='https://www.github.com/bryanjsilva' target='_blank' rel="noreferrer">
-                            <i className='fa fa-github fa-fw'></i>
+                            <i className='fa fa-github fa-fw redes'></i>
                         </a>
                     </section>
                 </div>
