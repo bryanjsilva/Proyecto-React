@@ -17,15 +17,13 @@ export default class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      logged: false,
-      nombreIngreso: 'Ingresar'
+      logged: false
     }
   }
 
   statusIngreso = (ingreso) => {
     this.setState({
-      logged: ingreso,
-      nombreIngreso:'Salir'
+      logged: ingreso
     })
   }
 

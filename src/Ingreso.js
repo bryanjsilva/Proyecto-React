@@ -23,7 +23,7 @@ export default class Contacto extends Component {
 
     validarPass = (pass) => {
         return(
-            pass.length < 5 ? false : true
+            pass.length < 4 ? false : true
         )
     }
 
@@ -41,28 +41,45 @@ export default class Contacto extends Component {
             let emailValido = this.validarEmail(emailValue);
             let passValido = this.validarPass(passValue);
 
+            if(!emailValido){
+                this.setState({emailError: 'El correo ingresado no es válido'})
+            }else{
+                this.setState({emailError: ''})
+            }
+
+            if(!passValido){
+                this.setState({passError: 'La contraseña ingresada no es válida'})
+            }else{
+                this.setState({passError: ''})
+            }
+
             if(emailValido && passValido){
-                this.setState({
-                    emailError:'',
-                    passError:''
-                })
-                this.validarIngreso()
-            }else if(!emailValido){
-                this.setState({
-                    emailError:'Correo inválido'
-                })
-            }else if(!passValido){
-                this.setState({
-                    passError:'Contraseña inválida'
-                })
+                this.validarIngreso();
             }
         }
         if(evento.target.id==='salir'){
             this.setState({logged: false})
+            this.props.statusIngreso(false)
         }
         evento.preventDefault();
     }
     
+    manejarOnChange = (evento) => {
+        if(evento.target.id==='email'){
+            let emailValido = this.validarEmail(evento.target.value)
+            this.setState({
+                emailError: '',
+                emailValido: emailValido ? 'is-valid' : 'is-invalid'
+            })
+        }else if(evento.target.id==='pass'){
+            let passValida = this.validarPass(evento.target.value)
+            this.setState({
+                passError: '',
+                passValida: passValida ? 'is-valid' : 'is-invalid'
+            })
+        }
+    }
+
     render(){
         if(this.state.logged){
             return(
@@ -88,7 +105,9 @@ export default class Contacto extends Component {
                                     <span className='input-group-text bg-white'>
                                         <i className='fa fa-envelope fa-fw' />
                                     </span>
-                                    <input type='email' className='form-control' placeholder='Correo electrónico' id='email'/>
+                                    <input type='email' className={'form-control '+this.state.emailValido} placeholder='Correo electrónico' 
+                                    id='email'
+                                    onChange={this.manejarOnChange}/>
                                 </div>
                                 <small
                                     className='text-danger'>
@@ -98,7 +117,8 @@ export default class Contacto extends Component {
                                     <span className='input-group-text bg-white'>
                                         <i className='fa fa-key fa-fw' />
                                     </span>
-                                    <input type='password' className='form-control' placeholder='Contraseña' id='pass'/>
+                                    <input type='password' className={'form-control '+this.state.passValida} placeholder='Contraseña' id='pass'
+                                    onChange={this.manejarOnChange}/>
                                 </div>
                                 <small
                                     className='text-danger'>
