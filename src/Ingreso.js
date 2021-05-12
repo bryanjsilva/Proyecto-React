@@ -8,6 +8,7 @@ export default class Contacto extends Component {
         super(props);
         this.state={
             logged: this.props.logged,
+            google: false,
             emailValido:'',
             passValida:'',
             emailError:'',
@@ -63,7 +64,9 @@ export default class Contacto extends Component {
         if(evento.target.id==='salir'){
             this.setState({logged: false})
             this.props.statusIngreso(false)
-            this.logout()
+            if(this.state.google){
+                this.logout()
+            }
         }
         if(evento.target.id==='google'){
             if(this.state.logged===false){
@@ -96,18 +99,26 @@ export default class Contacto extends Component {
         if(!loggedInGoogle){
             auth.signIn().then(
                 (success) => {
-                    this.setState({logged:true})
+                    this.setState({
+                        logged:true,
+                        google:true
+                    })
                     this.props.statusIngreso(true)
                     console.log(this.state.logged)
                     console.log(this.props.statusIngreso)
                 },
                 (error) => {
-                    this.setState({logged:false})
+                    this.setState({
+                        logged:false,
+                        google:false
+                    })
                     this.props.statusIngreso(false)
                 }
             )
         }else{
-            this.setState({logged:true})
+            this.setState({
+                logged:true,
+                google:true})
             this.props.statusIngreso(false)
         }
     }
