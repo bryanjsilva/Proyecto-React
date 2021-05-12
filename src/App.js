@@ -12,7 +12,6 @@ import Inicio from './Inicio'
 import Contacto from './Contacto'
 import Ingreso from './Ingreso'
 
-
 export default class App extends Component {
   constructor(props){
     super(props);
@@ -65,7 +64,9 @@ export default class App extends Component {
                 <Contacto />
               </Route>
               <Route path='/ingreso'>
-                <Ingreso logged={this.state.logged} statusIngreso={this.statusIngreso}/>
+                <Ingreso 
+                  logged={this.state.logged} 
+                  statusIngreso={this.statusIngreso}/>
               </Route>
             </Switch>
           </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import logo from './img/logo-min.png'
 import './Ingreso.css'
+import GoogleLogin from './GoogleLogin'
 
 export default class Contacto extends Component {
 
@@ -35,6 +36,7 @@ export default class Contacto extends Component {
     }
 
     manejarOnClick = (evento) => {
+        evento.preventDefault();
         if(evento.target.id==='ingreso'){
             let emailValue = document.getElementById('email').value;
             let passValue = document.getElementById('pass').value;
@@ -61,7 +63,6 @@ export default class Contacto extends Component {
             this.setState({logged: false})
             this.props.statusIngreso(false)
         }
-        evento.preventDefault();
     }
     
     manejarOnChange = (evento) => {
@@ -125,13 +126,17 @@ export default class Contacto extends Component {
                                         {this.state.passError}
                                 </small>
                                 <a 
-                                    className='btn primary w-100 my-2'
+                                    className='btn primary w-100 mt-2'
                                     href='/ingreso'
                                     id='ingreso'
                                     onClick={this.manejarOnClick}>
                                         Ingresar &nbsp;<span><i className='fa fa-sign-in fa-fw'></i></span>
                                 </a>
                             </form>
+                            <hr/>
+                            <GoogleLogin 
+                                logged={this.props.logged}
+                                statusIngreso={this.props.statusIngreso}/>
                         </div>
                     </div>
                 </div>
