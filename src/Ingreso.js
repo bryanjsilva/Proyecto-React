@@ -9,6 +9,7 @@ export default class Contacto extends Component {
         this.state={
             logged: this.props.logged,
             google: false,
+            facebook: false,
             emailValido:'',
             passValida:'',
             emailError:'',
@@ -33,8 +34,6 @@ export default class Contacto extends Component {
             logged: true,
         })
         this.props.statusIngreso(true)
-        console.log(this.state.logged)
-        console.log(this.props.statusIngreso)
     }
 
     manejarOnClick = (evento) => {
@@ -73,6 +72,16 @@ export default class Contacto extends Component {
                 this.login()
             }
         }
+        if(evento.target.id==='facebook'){
+            if(!this.FB) this.FB = window.FB;
+            if(this.FB){
+                if(this.state.facebook){
+                    this.FB.logout(this.fbLoginStatus)
+                }else{
+                    this.FB.login(this.fbLoginStatus)
+                }
+            }
+        }
     }
     
     manejarOnChange = (evento) => {
@@ -104,8 +113,6 @@ export default class Contacto extends Component {
                         google:true
                     })
                     this.props.statusIngreso(true)
-                    console.log(this.state.logged)
-                    console.log(this.props.statusIngreso)
                 },
                 (error) => {
                     this.setState({
@@ -145,7 +152,53 @@ export default class Contacto extends Component {
                 this.gapi.load('auth2',function(){})
             };
         },100)
+        this.iniciarFB()
     }
+
+    iniciarFB = () => {
+        window.fbAsyncInit = function() {
+            window.FB.init({
+              appId      : '304936961046186',
+              cookie     : true,
+              xfbml      : true,
+              version    : 'v10.0'
+            });   
+            window.FB.AppEvents.logPageView();   
+            var fbListo = new Event('FBListo');
+            document.dispatchEvent(fbListo);
+           
+        };
+        
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v10.0&appId=304936961046186&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        document.addEventListener('FBListo', this.fbLoginStatus);
+      }
+  
+      fbLoginStatus = () => {
+        this.FB = window.FB;
+        var logged='';
+        this.FB.getLoginStatus((response) => {
+          const loginStatus = response.status;
+          switch (loginStatus) {
+              case 'connected':
+                logged=true;
+                break;
+              default:
+                logged=false;
+                break;
+          }
+        });
+        this.setState({
+            logged:logged,
+            facebook:logged
+        })
+        this.props.statusIngreso(logged);
+      }
 
     render(){
         if(this.state.logged){
@@ -161,7 +214,7 @@ export default class Contacto extends Component {
         }else{
             return(
                 <div className='row justify-content-center'>
-                    <div className='col-12 col-md-6 col-lg-3 text-center mb-2'>
+                    <div className='col-9 col-md-5 col-lg-2 text-center mb-2'>
                         <img className='w-100' src={logo} alt='logo paseando ando'/>
                     </div>
                     <div className='row d-flex w-100 p-0 justify-content-center'>
@@ -198,12 +251,20 @@ export default class Contacto extends Component {
                                     onClick={this.manejarOnClick}>
                                         Ingresar &nbsp;<span><i className='fa fa-sign-in fa-fw'></i></span>
                                 </a>
+                                <hr/>
                                 <a 
-                                    className='btn btn-dark color-light w-100 mt-2'
+                                    className='btn btn-dark color-light w-100 mb-2'
                                     href = '/#'
                                     id='google'
                                     onClick={this.manejarOnClick}>
-                                        Ingresar con Google <span><i className='fa fa-google fa-fw'></i></span>
+                                        Ingresar con Google &nbsp;<span><i className='fa fa-google fa-fw'></i></span>
+                                </a>
+                                <a 
+                                    className='btn btn-primary color-light w-100 mb-2'
+                                    href = '/#'
+                                    id='facebook'
+                                    onClick={this.manejarOnClick}>
+                                        Ingresar con Facebook &nbsp;<span><i className='fa fa-facebook fa-fw'></i></span>
                                 </a>
                             </form>
                         </div>
