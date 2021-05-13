@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import logo from './img/logo-min.png'
 import './Ingreso.css'
+import Principal from './Principal'
 
 export default class Contacto extends Component {
 
@@ -203,12 +204,18 @@ export default class Contacto extends Component {
     render(){
         if(this.state.logged){
             return(
-                <div>
-                    <a 
-                        href='/#'
-                        id='salir' 
-                        className='btn btn-outline-dark'
-                        onClick={this.manejarOnClick}>Salir <i className='fa fa-sign-out fa-fw'></i></a>
+                <div className='fluid-container'>
+                    <div className='row'>
+                        <div className='col-12 d-flex justify-content-end my-3'>
+                            <a 
+                                href='/#'
+                                id='salir' 
+                                className='btn btn-outline-dark align-self-end'
+                                onClick={this.manejarOnClick}>Salir <i className='fa fa-sign-out fa-fw'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <Principal logged={this.state.logged}/>
                 </div>
             )
         }else{
@@ -235,7 +242,7 @@ export default class Contacto extends Component {
                                 </small>
                                 <div className='input-group my-2'>
                                     <span className='input-group-text bg-white'>
-                                        <i className='fa fa-key fa-fw' />
+                                        <i className='fa fa-lock fa-fw' />
                                     </span>
                                     <input type='password' className={'form-control '+this.state.passValida} placeholder='Contraseña' id='pass'
                                     onChange={this.manejarOnChange}/>
