@@ -204,7 +204,7 @@ export default class Contacto extends Component {
     render(){
         if(this.state.logged){
             return(
-                <div className='fluid-container'>
+                <div className='fluid-container' style={{marginTop: 12 + 'vh'}}>
                     <div className='row'>
                         <div className='col-12 d-flex justify-content-end my-3'>
                             <a 
@@ -220,7 +220,7 @@ export default class Contacto extends Component {
             )
         }else{
             return(
-                <div className='row justify-content-center'>
+                <div className='row justify-content-center' style={{marginTop: 15 + 'vh'}}>
                     <div className='col-9 col-md-5 col-lg-2 text-center mb-2'>
                         <img className='w-100' src={logo} alt='logo paseando ando'/>
                     </div>

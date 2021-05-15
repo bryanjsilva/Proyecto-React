@@ -5,7 +5,7 @@ export default class Contacto extends Component {
 
     render(){
         return(
-            <div className='row text my-5 justify-content-center text-justify'>
+            <div className='row text justify-content-center text-justify' style={{marginTop: 20 + 'vh'}}>
                 <div className='col-12 col-lg-6'>
                     <h1>Sobre nosotros</h1><br/>
                     <h2>Esta app...</h2><br/>

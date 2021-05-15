@@ -5,7 +5,7 @@ export default class Inicio extends Component {
 
     render(){
         return(
-            <div className='row mt-4 justify-content-center'>
+            <div className='row justify-content-center' style={{marginTop: 15 + 'vh'}}>
                 <div className='col-12 col-md-5'>
                     <img className='w-100' src={logo} alt='Logo paseando ando'></img>               
                 </div>

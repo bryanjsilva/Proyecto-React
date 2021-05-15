@@ -31,7 +31,7 @@ export default class App extends Component {
       <Router>
         <div className='container-fluid'>
           <div className='row'>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
               <div className="container-fluid">
                 <div className='col-4 col-md-1 text-center'>
                   <a className="navbar-brand" href='/'>
