@@ -13,27 +13,30 @@ export default function Horario(props) {
                </div>;
     })
     horarios=<div className='row d-flex justify-content-center'>
-                <div className='col-12 col-md-4 p-4 card'>
+                <div className='col-10 col-md-8 col-lg-4 p-4 card'>
                   {abierto}
                 </div>
              </div>
-  }else
+  }else{
     horarios=<div className='row d-flex justify-content-center'>
-                <div className='col-12 col-md-4 p-4 card'>
+                <div className='col-10 col-lg-4 p-4 card'>
                   <strong className='text-center'>Horario no disponible</strong>
                 </div>
             </div>;
+  }
+
+  const nombreBoton = open ? 'Ocultar Horarios' : 'Ver Horarios';
 
   return (
     <>
       <Button
-        className='m-3'
+        className='my-4'
         variant='dark'
         onClick={() => setOpen(!open)}
         aria-controls="collapse-text"
         aria-expanded={open}
       >
-      Ver horarios
+        {nombreBoton}
       </Button>
       <Collapse in={open}>
         <div id="collapse-text" className='mb-5'>

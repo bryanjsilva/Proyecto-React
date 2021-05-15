@@ -24,10 +24,10 @@ export default class Place extends Component {
         <section className='row p-2' >
           <div className='col-12 text-center'>{this.props.placeData.address}</div>
         </section>
-        <section className='row p-md-3'>
+        <section className='row p-lg-2'>
           {htmlPhotos.slice(0,3)} 
         </section>
-        <section className='row p-md-3'>
+        <section className='row p-lg-2'>
           {htmlPhotos.slice(3,6)} 
         </section>
       </div>

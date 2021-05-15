@@ -96,15 +96,8 @@ export default class Principal extends Component {
             address:place.formatted_address,photos:placePhotos}
           const placesTemp = <Place placeData={placeTemp}/>;
           const placeHorarios = <Horario horarios={place.opening_hours}/>
-          var rating=''
-          if (place.rating){
-            rating = <Rating placeRating={place.rating} placeReviews={place.reviews}/>
-          }
-          else{
-            rating = <div key={1} className='row mt-2 mb-1 pl-3' >
-                      <strong>No hay comentarios</strong>
-                     </div>;
-          }
+          var rating = <Rating placeRating={place.rating} placeReviews={place.reviews}/>
+
           console.log('address_component: '+ place.address_component, 
           'adr_address: '+place.adr_address, 'alt_id', 'formatted_address', 'geometry: '+place.geometry,
           'icon: '+place.icon, 'business_status', 'photo',' rating: '+place.rating,
@@ -129,7 +122,7 @@ export default class Principal extends Component {
                                 id='origen'
                                 />
                             <div 
-                                className='btn btn-outline-dark input-group-text d-flex flex-row'
+                                className='btn btn-dark input-group-text d-flex flex-row'
                                 onClick={this.manejoOnClick}
                                 id='boton'>
                                 <span className='d-none d-md-block'>Buscar &nbsp;</span>

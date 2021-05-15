@@ -1,47 +1,47 @@
-import React, { Component } from 'react'
-import '../node_modules/font-awesome/css/font-awesome.css'
+import React, { useState } from 'react'
+import { Button, Collapse } from 'react-bootstrap'
 import StarRatings from 'react-star-ratings'
 
-export default class Rating extends Component {
-  constructor(props){
-    super(props);
-    this.state={mostrarComentarios:this.props.mostrarComentarios};
-  }
+export default function Rating(props) {
+  
+    const [open, setOpen] = useState(false);
 
-  manejoOnClick = (e) => {
-    if (e.target.id==='btnComentarios')
-      this.setState((prevState) => {
-        return {mostrarComentarios: !prevState.mostrarComentarios}
-      })
-  }
-
-  render() {
-    var reviews
-    if (this.props.placeReviews && this.props.placeReviews.length > 0){
-      console.log('1');
-      reviews = this.props.placeReviews.map((review,index) => {
-      return <div key={index} className='row mt-2 mb-1' >
-                <div className='col-2'><strong>{review.author_name}</strong></div>
-                <div className='col-10'>{review.text}</div>
-              </div>;
+    var reviews;
+    if (props.placeReviews && props.placeReviews.length > 0){
+      reviews = props.placeReviews.map((review,index) => {
+      return (
+        <div className='row d-flex justify-content-center'>
+          <div key={index} className='col-11 card d-flex my-1 mx-lg-5 p-2' >
+            <div className='col-12 card-title'>
+              <strong>{review.author_name}</strong>
+            </div>
+            <div className='col-12 card-text'>
+              {review.text}
+            </div>
+          </div>
+        </div>
+      )
       })
     }else{
-      console.log('2');
-      reviews = <div key={1} className='row' >
-                <strong>No hay comentarios</strong>
-              </div>;
+      reviews= <div className='row d-flex justify-content-center'>
+                  <div className='col-10 col-lg-4 p-4 card'>
+                    <strong className='text-center'>No hay comentarios</strong>
+                  </div>
+                </div>;
     }
 
-    const btnName = this.state.mostrarComentarios ? 'Ocultar Comentarios' : 'Mostrar Comentarios';
-    const mostrar = this.state.mostrarComentarios ? 'd-block' : 'd-none'
+    const nombreBoton = open ? 'Ocultar Comentarios' : 'Ver Comentarios';
+
+    const mostrarRating = props.placeRating !== undefined ? 'd-block' : 'd-none';
+    
     return (
-      <div className='container'>
-        <div className='row d-flex justify-content-center flex-lg-row mt-3 mb-5 text-center'>
+      <div>
+        <div className={'row d-flex justify-content-center flex-lg-row mt-3 text-center '+mostrarRating}>
           <strong className='col-12 col-md-2'><h4>Rating: </h4></strong>
-          <h5>{this.props.placeRating}</h5>
+          <h5>{props.placeRating}</h5>
           <span className='text-center col-12 col-lg-4'>
             <StarRatings 
-              rating={this.props.placeRating}   
+              rating={props.placeRating}   
               starRatedColor='goldenrod' 
               numberOfStars={5} 
               name='rating' 
@@ -50,11 +50,25 @@ export default class Rating extends Component {
               />
           </span>
         </div>
-        <div className='mb-3 '><a  className='btn btn-primary' href='/#' id='btnComentarios' onClick={this.manejoOnClick}>{btnName}</a></div>
-        <div className={'container '+mostrar}>
-          {reviews}
-        </div>
+        <>
+          <Button
+            className='my-4'
+            variant='dark'
+            onClick={() => setOpen(!open)}
+            aria-controls="collapse-text"
+            aria-expanded={open}
+          >
+            {nombreBoton}
+          </Button>
+          <Collapse in={open}>
+            <div id="collapse-text">
+              {reviews}
+            </div>
+          </Collapse>
+        </>
       </div>
+
+        
     )
-  }
+  
 }
