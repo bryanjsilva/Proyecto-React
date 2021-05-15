@@ -119,7 +119,7 @@ export default class Principal extends Component {
     render(){
         return(
             <main className='row justify-content-center my-4'>
-                <div className='col-12 col-md-8 border p-3'>
+                <div className='col-12 col-md-8 border rounded p-3'>
                     <form>
                         <label className='form-label'><h3>Encuentra el mejor lugar para ti</h3></label><br/>
                         <div className='input-group'>

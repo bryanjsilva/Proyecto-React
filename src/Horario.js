@@ -18,9 +18,11 @@ export default function Horario(props) {
                 </div>
              </div>
   }else
-    horarios=<div className='row'>
-                <strong>Horario no disponible</strong>
-              </div>;
+    horarios=<div className='row d-flex justify-content-center'>
+                <div className='col-12 col-md-4 p-4 card'>
+                  <strong className='text-center'>Horario no disponible</strong>
+                </div>
+            </div>;
 
   return (
     <>
@@ -34,7 +36,7 @@ export default function Horario(props) {
       Ver horarios
       </Button>
       <Collapse in={open}>
-        <div id="collapse-text">
+        <div id="collapse-text" className='mb-5'>
           {horarios}
         </div>
       </Collapse>
