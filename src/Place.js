@@ -7,31 +7,29 @@ export default class Place extends Component {
       cantPhotos = 6;
     else
       cantPhotos = 3;
-    const colSize = 4
+    const colSize = 4;
     var htmlPhotos=[];
     this.props.placeData.photos.map((photo, index) => {
       htmlPhotos.push(
-        <div key={index} className={'col-'+colSize+' text-center'} >
-          <img src={photo} alt={this.props.placeData.name}/>
+        <div key={index} className={'col-12 col-lg-'+colSize+' text-center'} >
+          <img src={photo} alt={this.props.placeData.name} className='w-100'/>
         </div>);
-        if (index === (cantPhotos-1)) return
+        if (index === (cantPhotos-1)) return;
     })
     return (
       <div>
-        <div className='row py-2'>
-          <div className='col-12 text-center' >{this.props.placeData.name}</div>
+        <div className='row mt-4 mb-1'>
+          <h4 className='col-12 text-center' >{this.props.placeData.name}</h4>
         </div>
-        <div className='row py-2'>
+        <section className='row p-2' >
+          <div className='col-12 text-center'>{this.props.placeData.address}</div>
+        </section>
+        <section className='row p-md-3'>
           {htmlPhotos.slice(0,3)} 
-        </div>
-        <div className='row py-2'>
+        </section>
+        <section className='row p-md-3'>
           {htmlPhotos.slice(3,6)} 
-        </div>
-        <div className='row' >
-          <div className='col-2'></div>
-          <div className='col-8'> {this.props.placeData.address}</div>
-          <div className='col-2'></div>
-        </div>
+        </section>
       </div>
     )
   }
