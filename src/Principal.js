@@ -5,6 +5,16 @@ import Place from './Place';
 import Rating from './Rating';
 import Horario from './Horario';
 
+let latitude = '';
+let longitude = '';
+navigator.geolocation.getCurrentPosition(function(position) {
+  latitude = position.coords.latitude;
+  longitude = position.coords.longitude;
+  console.log("Latitude is :", latitude);
+  console.log("Longitude is :", longitude);
+});
+
+
 export default class Principal extends Component {
 
     constructor(props){
@@ -12,7 +22,7 @@ export default class Principal extends Component {
         this.state={photo:''};
       }
     
-      map='';
+      map=''
     
       componentDidMount(){
         const googlePlaceAPILoad = setInterval(() => {
@@ -20,8 +30,9 @@ export default class Principal extends Component {
             this.google=window.google;
             clearInterval(googlePlaceAPILoad);
             console.log('Load Place API');
-            const mapCenter = new this.google.maps.LatLng(4.624335,-74.064644);
-            this.map = new this.google.maps.Map(document.getElementById('map'), {
+            
+            const mapCenter = new this.google.maps.LatLng(latitude, longitude);
+            this.map = new this.google.maps.Map(document.getElementById('gmapContainer'), {
               center: mapCenter,
               zoom: 15
             });
@@ -32,12 +43,9 @@ export default class Principal extends Component {
       }
     
       showMap(mapCenter) {
-        // The location of Uluru
-        var uluru = {lat: -25.344, lng: 131.036};
-        // The map, centered at Uluru
+        
         var map = new window.google.maps.Map(
             document.getElementById('map'), {zoom: 15, center: mapCenter});
-        // The marker, positioned at Uluru
         var marker = new window.google.maps.Marker({position: mapCenter, map: map});
       }
     
@@ -133,7 +141,9 @@ export default class Principal extends Component {
                     {this.state.places}
                     {this.state.placeHorarios}
                     {this.state.placeRating}
-                    <div id='map'></div>
+                    <strong className='col-12 col-md-2'><h4 className='mt-3'>Ubicación </h4></strong>
+                    <div className='my-3 card' id='map'>
+                    </div>
                 </div>
             </main>
         )

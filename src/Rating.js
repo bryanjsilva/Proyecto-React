@@ -10,8 +10,8 @@ export default function Rating(props) {
     if (props.placeReviews && props.placeReviews.length > 0){
       reviews = props.placeReviews.map((review,index) => {
       return (
-        <div className='row d-flex justify-content-center'>
-          <div key={index} className='col-11 card d-flex my-1 mx-lg-5 p-2' >
+        <div key={index} className='row d-flex justify-content-center'>
+          <div className='col-11 card d-flex my-1 mx-lg-5 p-2' >
             <div className='col-12 card-title'>
               <strong>{review.author_name}</strong>
             </div>
@@ -24,7 +24,7 @@ export default function Rating(props) {
       })
     }else{
       reviews= <div className='row d-flex justify-content-center'>
-                  <div className='col-10 col-lg-4 p-4 card'>
+                  <div key={1} className='col-10 col-lg-4 p-4 card'>
                     <strong className='text-center'>No hay comentarios</strong>
                   </div>
                 </div>;
