@@ -53,17 +53,20 @@ export default class Principal extends Component {
           radius: 1000,
         }
         let lugaresCercanos = [];
+        let mostrarMas = [];
         let service = new this.google.maps.places.PlacesService(map);
         service.nearbySearch(request_near, function(results,status){
           if(status=== 'OK'){
             results.map((lugares,index) => {
               if (index < 10 && index > 0){
                 lugaresCercanos.push(lugares);
+              }if(index >10 && index < results.length-1){
+                mostrarMas.push(lugares);
               }
             })
           }
         })
-        let cercanos = <Cercanos lugares={lugaresCercanos}/>;
+        let cercanos = <Cercanos lugares={lugaresCercanos} mas={mostrarMas}/>;
         this.setState({cercanos: cercanos},);
       }
     
