@@ -4,6 +4,7 @@ import '../node_modules/font-awesome/css/font-awesome.min.css'
 import Place from './Place';
 import Rating from './Rating';
 import Horario from './Horario';
+import Cercanos from './Cercanos';
 
 let latitude = '';
 let longitude = '';
@@ -47,6 +48,23 @@ export default class Principal extends Component {
         var map = new window.google.maps.Map(
             document.getElementById('map'), {zoom: 15, center: mapCenter});
         var marker = new window.google.maps.Marker({position: mapCenter, map: map});
+        const request_near = {
+          location: mapCenter,
+          radius: 1000,
+        }
+        let lugaresCercanos = [];
+        let service = new this.google.maps.places.PlacesService(map);
+        service.nearbySearch(request_near, function(results,status){
+          if(status=== 'OK'){
+            results.map((lugares,index) => {
+              if (index < 10 && index > 0){
+                lugaresCercanos.push(lugares);
+              }
+            })
+          }
+        })
+        let cercanos = <Cercanos lugares={lugaresCercanos}/>;
+        this.setState({cercanos: cercanos},);
       }
     
       manejoOnClick = (e) => {
@@ -96,7 +114,7 @@ export default class Principal extends Component {
           var placePhotos=['']
           if (place.photos){
             place.photos.map((placePhoto, index) => {
-              placePhotos[index]=placePhoto.getUrl({'maxWidth': 160, 'maxHeight': 120})
+              placePhotos[index]=placePhoto.getUrl({'minWidth': 160, 'minHeight': 120})
               if (index === 2) return;
             })
           }
@@ -141,6 +159,7 @@ export default class Principal extends Component {
                     {this.state.places}
                     {this.state.placeHorarios}
                     {this.state.placeRating}
+                    {this.state.cercanos}
                     <strong className='col-12 col-md-2'><h4 className='mt-3'>Ubicación </h4></strong>
                     <div className='my-3 card' id='map'>
                     </div>
