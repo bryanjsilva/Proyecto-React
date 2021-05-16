@@ -48,7 +48,7 @@ export default function Cercanos(props){
                     <div className='card-text'>
                         Rating: {calificacion} &nbsp;
                         {comentario}
-                        <img className='w-100' src={foto}></img>
+                        <img className='w-100 rounded mt-3' src={foto}></img>
                     </div>
                 </div>
             </section>

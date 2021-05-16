@@ -136,10 +136,12 @@ export default class Principal extends Component {
       }
 
       manejarOnKeyPress = (evento) => {
-        evento.preventDefault();
         if(evento.target.id==='origen' && evento.key==='Enter'){
           this.manejoOnClick();
+        }else{
+          return
         }
+        evento.preventDefault();
       }
     render(){
         return(
