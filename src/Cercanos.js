@@ -10,7 +10,7 @@ export default function Cercanos(props){
     let foto = '';
     let cercanos = [];
     let comentario;
-
+    
     props.lugares.map((lugar,index) => {
         nombre = lugar.name;
         if(lugar.photos){
