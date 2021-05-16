@@ -66,6 +66,8 @@ export default class Contacto extends Component {
             this.props.statusIngreso(false)
             if(this.state.google){
                 this.logout()
+            }if(this.state.facebook){
+                this.FB.logout()
             }
         }
         if(evento.target.id==='google'){
