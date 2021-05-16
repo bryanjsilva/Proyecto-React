@@ -135,6 +135,12 @@ export default class Principal extends Component {
         }
       }
 
+      manejarOnKeyPress = (evento) => {
+        evento.preventDefault();
+        if(evento.target.id==='origen' && evento.key==='Enter'){
+          this.manejoOnClick();
+        }
+      }
     render(){
         return(
             <main className='row justify-content-center my-4'>
@@ -146,6 +152,7 @@ export default class Principal extends Component {
                                 className='form-control'
                                 placeholder='Busca un lugar'
                                 id='origen'
+                                onKeyPress={this.manejarOnKeyPress}
                                 />
                             <div 
                                 className='btn btn-dark input-group-text d-flex flex-row'

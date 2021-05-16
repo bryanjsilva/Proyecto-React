@@ -55,7 +55,6 @@ export default function Cercanos(props){
         )
     })
 
-
     const nombreBoton = open ? 'Ocultar lugares cercanos' : 'Ver lugares cercanos';
     return(
         <>
