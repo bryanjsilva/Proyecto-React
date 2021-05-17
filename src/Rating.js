@@ -2,6 +2,10 @@ import React, { useState } from 'react'
 import { Button, Collapse } from 'react-bootstrap'
 import StarRatings from 'react-star-ratings'
 
+// Este componente permite mostrar una gráfica con estrellas para indicar el rating del lugar
+// Se usó react-star-ratings para mostrar este gráfico
+// Además para darle animación a los botones mostrar u ocultar comentarios se usa react-bootstrap
+
 export default function Rating(props) {
   
     const [open, setOpen] = useState(false);

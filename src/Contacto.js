@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './Contacto.css'
 
+// Esta pantalla muestra información de la app y de contacto
+
 export default class Contacto extends Component {
 
     render(){

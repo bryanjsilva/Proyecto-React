@@ -6,6 +6,9 @@ import Rating from './Rating';
 import Horario from './Horario';
 import Cercanos from './Cercanos';
 
+// Para esta app se añaden componentes para mostrar fotos, el rating y comentarios, horario de atención y los lugares cercanos a la ubicación buscada o la accedida desde el navegador.
+
+// Esta parte del código permite obtener la ubicación del usuario
 let latitude = '';
 let longitude = '';
 navigator.geolocation.getCurrentPosition(function(position) {
@@ -14,7 +17,6 @@ navigator.geolocation.getCurrentPosition(function(position) {
   console.log("Latitude is :", latitude);
   console.log("Longitude is :", longitude);
 });
-
 
 export default class Principal extends Component {
 
@@ -44,7 +46,7 @@ export default class Principal extends Component {
       }
     
       showMap(mapCenter) {
-        
+        //Se muestra el mapa con las coordenadas obtenidas de la búsqueda o ubicación inicial
         var map = new window.google.maps.Map(
             document.getElementById('map'), {zoom: 15, center: mapCenter});
         var marker = new window.google.maps.Marker({position: mapCenter, map: map});
@@ -52,6 +54,8 @@ export default class Principal extends Component {
           location: mapCenter,
           radius: 1000,
         }
+        //Se obtienen los primeros 9 lugares cercanos de la ubicación para mostrarle al usuario
+        // además el resto de lugares cercanos se guarda en otro array.
         let lugaresCercanos = [];
         let mostrarMas = [];
         let service = new this.google.maps.places.PlacesService(map);
@@ -71,7 +75,8 @@ export default class Principal extends Component {
           cercanos: cercanos,
           mapCenter: mapCenter}
           );
-
+        
+          // Se inicializan los servicios de Directions para mostrar la ruta en el mapa
         const directionsRenderer = new this.google.maps.DirectionsRenderer();
         const directionsService = new this.google.maps.DirectionsService();
         directionsRenderer.setMap(map);
@@ -84,7 +89,7 @@ export default class Principal extends Component {
       initDirection = () => {
         this.calculateAndDisplayRoute(this.state.directionsService, this.state.directionsRenderer);
       }
-
+      // Estas funciones permiten mostrar la ruta seleccionada por el usuario y el modo obtenido del select
       calculateAndDisplayRoute = (directionsService, directionsRenderer) => {
         const selectedMode = document.getElementById('mode').value;
         directionsService.route(
@@ -103,6 +108,7 @@ export default class Principal extends Component {
         )
       }
     
+      // Se maneja el click del botón buscar asociado a la barra de búsqueda
       manejoOnClick = (e) => {
         const request = {
           query: document.getElementById('origen').value ,
@@ -144,7 +150,7 @@ export default class Principal extends Component {
         };
         this.service.getDetails(request, this.foundPlaceDatail);
       }
-    
+    // Una vez obtenidos los datos del lugar buscado se envían los datos necesarios al resto de componentes
       foundPlaceDatail = (place, status) => {
         if (status === 'OK'){
           var placePhotos=['']
@@ -171,6 +177,7 @@ export default class Principal extends Component {
         }
       }
 
+      // Esta función permite realizar la búsqueda cuando se presione la tecla enter en el buscador
       manejarOnKeyPress = (evento) => {
         if(evento.target.id==='origen' && evento.key==='Enter'){
           this.manejoOnClick();
@@ -180,6 +187,8 @@ export default class Principal extends Component {
         evento.preventDefault();
       }
 
+      // Una vez elegido el modo de transporte se maneja el evento de click con esta función para mostrar la ruta
+      // desde la ubicación del usuario hacia el lugar elegido
       direcciones = (evento) => {
         evento.preventDefault();
        this.initDirection();

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import logo from './img/logo-min.png'
 
+// Esta es la pantalla de inicio, muestra el logo y un texto
+
 export default class Inicio extends Component {
 
     render(){

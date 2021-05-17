@@ -12,6 +12,10 @@ import Inicio from './Inicio'
 import Contacto from './Contacto'
 import Ingreso from './Ingreso'
 
+// Se utiliza react-router-dom para crear el navbar y se agregan los componentes
+// que se mostrarán en la app
+
+// Se utiliza el estado logged para manejar el login con correo, google y/o facebook
 export default class App extends Component {
   constructor(props){
     super(props);

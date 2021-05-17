@@ -2,6 +2,14 @@ import React, { useState } from 'react'
 import { Button, Collapse } from 'react-bootstrap'
 import StarRatings from 'react-star-ratings'
 
+// Este componente muestra y oculta los lugares cercanos a la ubicación del usuario o a los lugares buscados
+
+// Se maneja este evento de click para pasar los datos del lugar clickeado a la app principal y realizar la actualización del mapa, rating, etc.
+
+// Además se muestra el rating y una foto de cada lugar cercano. 
+
+// Se añade un botón dentro de estos lugares cercanos para mostrar el resto de lugares cercanos, estos son pasados como props desde la pantalla principal.
+
 function manejarOnClick(evento){
     if(evento.target.id==='lugar'){
         evento.preventDefault();

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Collapse } from 'react-bootstrap'
 
+// Esta app oculta y muestra los horarios de atención de los lugares, de igual forma se usa react-bootstrap
+
 export default function Horario(props) {
 
   const [open, setOpen] = useState(false);

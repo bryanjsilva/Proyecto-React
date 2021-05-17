@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+// Esta función permite mostrar 6 imágenes de forma ordenada para los lugares que se buscaron
+
 export default class Place extends Component {
   render() {
     var cantPhotos = this.props.placeData.photos.length;
@@ -12,7 +14,7 @@ export default class Place extends Component {
     this.props.placeData.photos.map((photo, index) => {
       htmlPhotos.push(
         <div key={index} className={'col-12 col-lg-'+colSize+' text-center'} >
-          <img src={photo} alt={this.props.placeData.name} className='w-100'/>
+          <img src={photo} alt={this.props.placeData.name} className='w-100 rounded'/>
         </div>);
         if (index === (cantPhotos-1)) return;
     })

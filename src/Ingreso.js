@@ -3,6 +3,11 @@ import logo from './img/logo-min.png'
 import './Ingreso.css'
 import Principal from './Principal'
 
+// Esta pantalla muestra y maneja el login 
+// Se usaron los 3 métodos aprendidos, correo electrónico, facebook y google
+// Se muestran mensajes de error para validar el correo y contraseña
+// Se añaden estados para que al presionar el botón Salir se cierre la sesión con cualquiera de los métodos usados para ingresar
+
 export default class Contacto extends Component {
 
     constructor(props){
@@ -217,6 +222,7 @@ export default class Contacto extends Component {
                             </a>
                         </div>
                     </div>
+                    {/*Aquí se añade la interfaz principal de la app, una vez que se ha loggeado*/}
                     <Principal logged={this.state.logged}/>
                 </div>
             )
