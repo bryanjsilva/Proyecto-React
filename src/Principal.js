@@ -67,7 +67,40 @@ export default class Principal extends Component {
           }
         })
         let cercanos = <Cercanos lugares={lugaresCercanos} mas={mostrarMas}/>;
-        this.setState({cercanos: cercanos},);
+        this.setState({
+          cercanos: cercanos,
+          mapCenter: mapCenter}
+          );
+
+        const directionsRenderer = new this.google.maps.DirectionsRenderer();
+        const directionsService = new this.google.maps.DirectionsService();
+        directionsRenderer.setMap(map);
+        this.setState({
+          directionsRenderer: directionsRenderer,
+          directionsService: directionsService
+        })
+      }
+
+      initDirection = () => {
+        this.calculateAndDisplayRoute(this.state.directionsService, this.state.directionsRenderer);
+      }
+
+      calculateAndDisplayRoute = (directionsService, directionsRenderer) => {
+        const selectedMode = document.getElementById('mode').value;
+        directionsService.route(
+          {
+            origin: {lat: latitude, lng: longitude},
+            destination: this.state.mapCenter,
+            travelMode: this.google.maps.TravelMode[selectedMode]
+          },
+          ( response, status ) => {
+            if(status ==='OK'){
+              directionsRenderer.setDirections(response);
+            }else{
+              window.alert('El pedido de la dirección ha fallado debido a '+status);
+            }
+          }
+        )
       }
     
       manejoOnClick = (e) => {
@@ -146,6 +179,12 @@ export default class Principal extends Component {
         }
         evento.preventDefault();
       }
+
+      direcciones = (evento) => {
+        evento.preventDefault();
+       this.initDirection();
+      }
+
     render(){
         return(
             <main className='row justify-content-center my-4'>
@@ -173,6 +212,16 @@ export default class Principal extends Component {
                     {this.state.placeRating}
                     {this.state.cercanos}
                     <strong className='col-12 col-md-2'><h4 className='mt-3'>Ubicación </h4></strong>
+                    <section className='d-flex flex-column flex-lg-row'>
+                      <a className='btn primary' href='/#' onClick={this.direcciones}>Ir al lugar &nbsp;<i className='fa fa-map-marker fa-fw'></i></a>
+                      <div className='col-12 col-lg-3 mx-lg-2 my-2 my-lg-0'>
+                        <select className="form-select w-100" aria-label="select" id='mode'>
+                          <option defaultValue value="DRIVING">Vehículo</option>
+                          <option value="WALKING">Caminar</option>
+                          <option value="TRANSIT">Bus</option>
+                        </select>
+                      </div>
+                    </section>
                     <div className='my-3 card' id='map'>
                     </div>
                 </div>
