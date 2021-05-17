@@ -2,6 +2,16 @@ import React, { useState } from 'react'
 import { Button, Collapse } from 'react-bootstrap'
 import StarRatings from 'react-star-ratings'
 
+function manejarOnClick(evento){
+    if(evento.target.id==='lugar'){
+        evento.preventDefault();
+        document.getElementById('origen').value = evento.target.innerHTML;
+        document.getElementById('origen').focus();
+        document.getElementById('boton').click();
+    }
+    
+}
+
 export default function Cercanos(props){
     
     const [open, setOpen] = useState(false);
@@ -34,7 +44,7 @@ export default function Cercanos(props){
             calificacion = lugar.rating;
             comentario = (<StarRatings 
                 rating={calificacion}   
-                starRatedColor='goldenrod' 
+                starRatedColor='gold' 
                 numberOfStars={5} 
                 name='rating' 
                 starDimension='1.8rem'
@@ -44,13 +54,23 @@ export default function Cercanos(props){
         cercanos.push(
             <section key={index} className='row d-flex justify-content-center'>
                 <div className='col-lg-6 card m-2 p-2'>
-                    <div className='card-title'>
-                        <strong>{nombre}</strong>
+                    <div className='card-title text-center'>
+                        <a 
+                            className='btn btn-link color-primary fw-bold' 
+                            id='lugar' 
+                            href='/#'
+                            onClick={(evento)=>{
+                                manejarOnClick(evento)
+                                setOpen(false);
+                                setOpen1(false);
+                            }}>
+                                {nombre}
+                        </a>
                     </div>
-                    <div className='card-text'>
+                    <div className='card-text text-center'>
                         Rating: {calificacion} &nbsp;
                         {comentario}
-                        <img className='w-100 rounded mt-3' src={foto}></img>
+                        <img className='w-100 rounded mt-3' src={foto} alt='foto de lugares buscados'></img>
                     </div>
                 </div>
             </section>
@@ -78,7 +98,7 @@ export default function Cercanos(props){
             calificacion = mas.rating;
             comentario = (<StarRatings 
                 rating={calificacion}   
-                starRatedColor='goldenrod' 
+                starRatedColor='gold' 
                 numberOfStars={5} 
                 name='rating' 
                 starDimension='1.8rem'
@@ -88,18 +108,29 @@ export default function Cercanos(props){
         mostrarMas.push(
             <section key={index} className='row d-flex justify-content-center'>
                 <div className='col-lg-6 card m-2 p-2'>
-                    <div className='card-title'>
-                        <strong>{nombre}</strong>
+                    <div className='card-title text-center'>
+                        <a 
+                            className='btn btn-link color-primary fw-bold' 
+                            id='lugar' 
+                            href='/#'
+                            onClick={(evento)=>{
+                                manejarOnClick(evento)
+                                setOpen(false);
+                                setOpen1(false);
+                            }}>
+                                {nombre}
+                        </a>
                     </div>
-                    <div className='card-text'>
+                    <div className='card-text text-center'>
                         Rating: {calificacion} &nbsp;
                         {comentario}
-                        <img className='w-100 rounded mt-3' src={foto}></img>
+                        <img className='w-100 rounded mt-3' src={foto} alt='foto de lugares buscados'></img>
                     </div>
                 </div>
             </section>
         )
     })
+
 
     const nombreBoton = open ? 'Ocultar lugares cercanos' : 'Ver lugares cercanos';
     const boton = open1 ? 'menos' : 'más';

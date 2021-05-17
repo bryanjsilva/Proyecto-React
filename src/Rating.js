@@ -42,7 +42,7 @@ export default function Rating(props) {
           <span className='text-center col-12 col-lg-4'>
             <StarRatings 
               rating={props.placeRating}   
-              starRatedColor='goldenrod' 
+              starRatedColor='gold' 
               numberOfStars={5} 
               name='rating' 
               starDimension='1.8rem'
