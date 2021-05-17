@@ -6,7 +6,6 @@ function manejarOnClick(evento){
     if(evento.target.id==='lugar'){
         evento.preventDefault();
         document.getElementById('origen').value = evento.target.innerHTML;
-        document.getElementById('origen').focus();
         document.getElementById('boton').click();
     }
     
